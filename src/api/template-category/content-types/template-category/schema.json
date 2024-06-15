@@ -1,0 +1,52 @@
+{
+  "kind": "collectionType",
+  "collectionName": "template_categories",
+  "info": {
+    "singularName": "template-category",
+    "pluralName": "template-categories",
+    "displayName": "Template Category",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "desc": {
+      "type": "string"
+    },
+    "templates": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::template.template",
+      "mappedBy": "template_category"
+    },
+    "filter_template": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::filter-template.filter-template",
+      "inversedBy": "template_categories"
+    },
+    "template_colors": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::template-color.template-color",
+      "mappedBy": "template_categories"
+    },
+    "template_styles": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::template-style.template-style",
+      "mappedBy": "template_categories"
+    },
+    "template_purposes": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::template-purpose.template-purpose",
+      "mappedBy": "template_categories"
+    }
+  }
+}

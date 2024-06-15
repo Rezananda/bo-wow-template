@@ -1,0 +1,95 @@
+{
+  "kind": "collectionType",
+  "collectionName": "templates",
+  "info": {
+    "singularName": "template",
+    "pluralName": "templates",
+    "displayName": "Template",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "template_name": {
+      "type": "string"
+    },
+    "template_description": {
+      "type": "text"
+    },
+    "template_free": {
+      "type": "boolean"
+    },
+    "template_price": {
+      "type": "string"
+    },
+    "template_image": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "template_category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::template-category.template-category",
+      "inversedBy": "templates"
+    },
+    "count_view": {
+      "type": "integer",
+      "default": 0
+    },
+    "template_colors": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::template-color.template-color",
+      "mappedBy": "templates"
+    },
+    "template_styles": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::template-style.template-style",
+      "mappedBy": "templates"
+    },
+    "template_purposes": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::template-purpose.template-purpose",
+      "mappedBy": "templates"
+    },
+    "template_canva_url": {
+      "type": "string"
+    },
+    "template_google_url": {
+      "type": "string"
+    },
+    "tutorial_and_tips": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::tutorial-and-tip.tutorial-and-tip",
+      "mappedBy": "templates"
+    },
+    "count_like": {
+      "type": "integer",
+      "default": 0
+    },
+    "count_share": {
+      "type": "integer",
+      "default": 0
+    },
+    "count_canva_open": {
+      "type": "integer",
+      "default": 0
+    },
+    "count_google_open": {
+      "type": "integer",
+      "default": 0
+    }
+  }
+}

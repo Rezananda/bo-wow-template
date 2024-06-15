@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "template_colors",
+  "info": {
+    "singularName": "template-color",
+    "pluralName": "template-colors",
+    "displayName": "Template Color",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "color_code": {
+      "type": "string"
+    },
+    "desc": {
+      "type": "text"
+    },
+    "template_categories": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::template-category.template-category",
+      "inversedBy": "template_colors"
+    },
+    "templates": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::template.template",
+      "inversedBy": "template_colors"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "tutorial_and_tip_categories",
+  "info": {
+    "singularName": "tutorial-and-tip-category",
+    "pluralName": "tutorial-and-tip-categories",
+    "displayName": "Tutorial and tip category",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "desc": {
+      "type": "string"
+    },
+    "tutorial_and_tips": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::tutorial-and-tip.tutorial-and-tip",
+      "mappedBy": "tutorial_and_tip_category"
+    }
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "kind": "collectionType",
+  "collectionName": "tutorial_and_tips",
+  "info": {
+    "singularName": "tutorial-and-tip",
+    "pluralName": "tutorial-and-tips",
+    "displayName": "tutorial and tip",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "video_name": {
+      "type": "string"
+    },
+    "video_description": {
+      "type": "text"
+    },
+    "video_link": {
+      "type": "string"
+    },
+    "thumbnail": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "tutorial_and_tip_category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::tutorial-and-tip-category.tutorial-and-tip-category",
+      "inversedBy": "tutorial_and_tips"
+    },
+    "video_id": {
+      "type": "string"
+    },
+    "templates": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::template.template",
+      "inversedBy": "tutorial_and_tips"
+    },
+    "count_view": {
+      "type": "integer",
+      "default": 0
+    }
+  }
+}
