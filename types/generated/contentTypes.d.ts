@@ -788,137 +788,56 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
-export interface ApiBuildDeckRequestBuildDeckRequest
+export interface ApiTemplateWebsiteTemplateWebsite
   extends Schema.CollectionType {
-  collectionName: 'build_deck_requests';
+  collectionName: 'template_websites';
   info: {
-    singularName: 'build-deck-request';
-    pluralName: 'build-deck-requests';
-    displayName: 'Build Deck Request';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    first_name: Attribute.String;
-    last_name: Attribute.String;
-    email: Attribute.Email;
-    phone_number: Attribute.String;
-    additional_description: Attribute.Text;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::build-deck-request.build-deck-request',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::build-deck-request.build-deck-request',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiFilterTemplateFilterTemplate extends Schema.CollectionType {
-  collectionName: 'filter_templates';
-  info: {
-    singularName: 'filter-template';
-    pluralName: 'filter-templates';
-    displayName: 'Filter Template';
+    singularName: 'template-website';
+    pluralName: 'template-websites';
+    displayName: 'Template Website';
     description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    Label: Attribute.String;
-    template_categories: Attribute.Relation<
-      'api::filter-template.filter-template',
-      'oneToMany',
-      'api::template-category.template-category'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::filter-template.filter-template',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::filter-template.filter-template',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiTemplateTemplate extends Schema.CollectionType {
-  collectionName: 'templates';
-  info: {
-    singularName: 'template';
-    pluralName: 'templates';
-    displayName: 'Template';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    template_name: Attribute.String;
-    template_description: Attribute.Text;
-    template_free: Attribute.Boolean;
-    template_price: Attribute.String;
-    template_image: Attribute.Media;
-    template_category: Attribute.Relation<
-      'api::template.template',
+    website_name: Attribute.String;
+    website_description: Attribute.Text;
+    website_start_price: Attribute.BigInteger;
+    website_image: Attribute.Media;
+    website_count_sold: Attribute.Integer;
+    template_website_category: Attribute.Relation<
+      'api::template-website.template-website',
       'manyToOne',
-      'api::template-category.template-category'
+      'api::template-website-category.template-website-category'
     >;
-    count_view: Attribute.Integer & Attribute.DefaultTo<0>;
-    template_colors: Attribute.Relation<
-      'api::template.template',
+    slug: Attribute.UID<
+      'api::template-website.template-website',
+      'website_name'
+    > &
+      Attribute.Required;
+    template_website_packets: Attribute.Relation<
+      'api::template-website.template-website',
       'manyToMany',
-      'api::template-color.template-color'
+      'api::template-website-packet.template-website-packet'
     >;
-    template_styles: Attribute.Relation<
-      'api::template.template',
-      'manyToMany',
-      'api::template-style.template-style'
+    template_website_order: Attribute.Relation<
+      'api::template-website.template-website',
+      'oneToOne',
+      'api::template-website-order.template-website-order'
     >;
-    template_purposes: Attribute.Relation<
-      'api::template.template',
-      'manyToMany',
-      'api::template-purpose.template-purpose'
-    >;
-    template_canva_url: Attribute.String;
-    template_google_url: Attribute.String;
-    tutorial_and_tips: Attribute.Relation<
-      'api::template.template',
-      'manyToMany',
-      'api::tutorial-and-tip.tutorial-and-tip'
-    >;
-    count_like: Attribute.Integer & Attribute.DefaultTo<0>;
-    count_share: Attribute.Integer & Attribute.DefaultTo<0>;
-    count_canva_open: Attribute.Integer & Attribute.DefaultTo<0>;
-    count_google_open: Attribute.Integer & Attribute.DefaultTo<0>;
+    website_feature: Attribute.JSON;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
-      'api::template.template',
+      'api::template-website.template-website',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     updatedBy: Attribute.Relation<
-      'api::template.template',
+      'api::template-website.template-website',
       'oneToOne',
       'admin::user'
     > &
@@ -926,13 +845,13 @@ export interface ApiTemplateTemplate extends Schema.CollectionType {
   };
 }
 
-export interface ApiTemplateCategoryTemplateCategory
+export interface ApiTemplateWebsiteCategoryTemplateWebsiteCategory
   extends Schema.CollectionType {
-  collectionName: 'template_categories';
+  collectionName: 'template_website_categories';
   info: {
-    singularName: 'template-category';
-    pluralName: 'template-categories';
-    displayName: 'Template Category';
+    singularName: 'template-website-category';
+    pluralName: 'template-website-categories';
+    displayName: 'Template Website Category';
     description: '';
   };
   options: {
@@ -941,42 +860,26 @@ export interface ApiTemplateCategoryTemplateCategory
   attributes: {
     name: Attribute.String;
     desc: Attribute.String;
-    templates: Attribute.Relation<
-      'api::template-category.template-category',
+    template_websites: Attribute.Relation<
+      'api::template-website-category.template-website-category',
       'oneToMany',
-      'api::template.template'
+      'api::template-website.template-website'
     >;
-    filter_template: Attribute.Relation<
-      'api::template-category.template-category',
-      'manyToOne',
-      'api::filter-template.filter-template'
-    >;
-    template_colors: Attribute.Relation<
-      'api::template-category.template-category',
-      'manyToMany',
-      'api::template-color.template-color'
-    >;
-    template_styles: Attribute.Relation<
-      'api::template-category.template-category',
-      'manyToMany',
-      'api::template-style.template-style'
-    >;
-    template_purposes: Attribute.Relation<
-      'api::template-category.template-category',
-      'manyToMany',
-      'api::template-purpose.template-purpose'
+    slug: Attribute.UID<
+      'api::template-website-category.template-website-category',
+      'desc'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
-      'api::template-category.template-category',
+      'api::template-website-category.template-website-category',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     updatedBy: Attribute.Relation<
-      'api::template-category.template-category',
+      'api::template-website-category.template-website-category',
       'oneToOne',
       'admin::user'
     > &
@@ -984,85 +887,56 @@ export interface ApiTemplateCategoryTemplateCategory
   };
 }
 
-export interface ApiTemplateColorTemplateColor extends Schema.CollectionType {
-  collectionName: 'template_colors';
-  info: {
-    singularName: 'template-color';
-    pluralName: 'template-colors';
-    displayName: 'Template Color';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    name: Attribute.String;
-    color_code: Attribute.String;
-    desc: Attribute.Text;
-    template_categories: Attribute.Relation<
-      'api::template-color.template-color',
-      'manyToMany',
-      'api::template-category.template-category'
-    >;
-    templates: Attribute.Relation<
-      'api::template-color.template-color',
-      'manyToMany',
-      'api::template.template'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::template-color.template-color',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::template-color.template-color',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiTemplatePurposeTemplatePurpose
+export interface ApiTemplateWebsiteOrderTemplateWebsiteOrder
   extends Schema.CollectionType {
-  collectionName: 'template_purposes';
+  collectionName: 'template_website_orders';
   info: {
-    singularName: 'template-purpose';
-    pluralName: 'template-purposes';
-    displayName: 'Template Purpose';
+    singularName: 'template-website-order';
+    pluralName: 'template-website-orders';
+    displayName: 'Template Website Order';
     description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    name: Attribute.String;
-    desc: Attribute.Text;
-    template_categories: Attribute.Relation<
-      'api::template-purpose.template-purpose',
-      'manyToMany',
-      'api::template-category.template-category'
+    full_name: Attribute.String & Attribute.Required;
+    phone_number: Attribute.String & Attribute.Required & Attribute.Unique;
+    email: Attribute.Email & Attribute.Required & Attribute.Unique;
+    subdomain: Attribute.String &
+      Attribute.Unique &
+      Attribute.SetMinMaxLength<{
+        minLength: 3;
+      }>;
+    template_website_packet: Attribute.Relation<
+      'api::template-website-order.template-website-order',
+      'oneToOne',
+      'api::template-website-packet.template-website-packet'
     >;
-    templates: Attribute.Relation<
-      'api::template-purpose.template-purpose',
-      'manyToMany',
-      'api::template.template'
+    template_website: Attribute.Relation<
+      'api::template-website-order.template-website-order',
+      'oneToOne',
+      'api::template-website.template-website'
     >;
+    start_subscribe: Attribute.Date;
+    is_free_1_month: Attribute.Boolean;
+    terms_and_conditions: Attribute.Boolean;
+    status: Attribute.Enumeration<
+      ['Request Order Diterima', 'Request Order Diproses', 'Live in Production']
+    >;
+    order_id: Attribute.String;
+    duration: Attribute.Integer;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
-      'api::template-purpose.template-purpose',
+      'api::template-website-order.template-website-order',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     updatedBy: Attribute.Relation<
-      'api::template-purpose.template-purpose',
+      'api::template-website-order.template-website-order',
       'oneToOne',
       'admin::user'
     > &
@@ -1070,125 +944,87 @@ export interface ApiTemplatePurposeTemplatePurpose
   };
 }
 
-export interface ApiTemplateStyleTemplateStyle extends Schema.CollectionType {
-  collectionName: 'template_styles';
-  info: {
-    singularName: 'template-style';
-    pluralName: 'template-styles';
-    displayName: 'Template Style';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    name: Attribute.String;
-    desc: Attribute.Text;
-    template_categories: Attribute.Relation<
-      'api::template-style.template-style',
-      'manyToMany',
-      'api::template-category.template-category'
-    >;
-    templates: Attribute.Relation<
-      'api::template-style.template-style',
-      'manyToMany',
-      'api::template.template'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::template-style.template-style',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::template-style.template-style',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiTutorialAndTipTutorialAndTip extends Schema.CollectionType {
-  collectionName: 'tutorial_and_tips';
-  info: {
-    singularName: 'tutorial-and-tip';
-    pluralName: 'tutorial-and-tips';
-    displayName: 'tutorial and tip';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    video_name: Attribute.String;
-    video_description: Attribute.Text;
-    video_link: Attribute.String;
-    thumbnail: Attribute.Media;
-    tutorial_and_tip_category: Attribute.Relation<
-      'api::tutorial-and-tip.tutorial-and-tip',
-      'manyToOne',
-      'api::tutorial-and-tip-category.tutorial-and-tip-category'
-    >;
-    video_id: Attribute.String;
-    templates: Attribute.Relation<
-      'api::tutorial-and-tip.tutorial-and-tip',
-      'manyToMany',
-      'api::template.template'
-    >;
-    count_view: Attribute.Integer & Attribute.DefaultTo<0>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::tutorial-and-tip.tutorial-and-tip',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::tutorial-and-tip.tutorial-and-tip',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiTutorialAndTipCategoryTutorialAndTipCategory
+export interface ApiTemplateWebsitePacketTemplateWebsitePacket
   extends Schema.CollectionType {
-  collectionName: 'tutorial_and_tip_categories';
+  collectionName: 'template_website_packets';
   info: {
-    singularName: 'tutorial-and-tip-category';
-    pluralName: 'tutorial-and-tip-categories';
-    displayName: 'Tutorial and tip category';
+    singularName: 'template-website-packet';
+    pluralName: 'template-website-packets';
+    displayName: 'Template Website Packet';
     description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    name: Attribute.String;
-    desc: Attribute.String;
-    tutorial_and_tips: Attribute.Relation<
-      'api::tutorial-and-tip-category.tutorial-and-tip-category',
-      'oneToMany',
-      'api::tutorial-and-tip.tutorial-and-tip'
+    packet_code: Attribute.String;
+    packet_name: Attribute.String;
+    packet_monthly_period: Attribute.Integer;
+    packet_price: Attribute.BigInteger;
+    packet_additional_info: Attribute.JSON;
+    template_websites: Attribute.Relation<
+      'api::template-website-packet.template-website-packet',
+      'manyToMany',
+      'api::template-website.template-website'
+    >;
+    packet_category: Attribute.Enumeration<['e-Commerce', 'CV Online']>;
+    template_website_order: Attribute.Relation<
+      'api::template-website-packet.template-website-packet',
+      'oneToOne',
+      'api::template-website-order.template-website-order'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
-      'api::tutorial-and-tip-category.tutorial-and-tip-category',
+      'api::template-website-packet.template-website-packet',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     updatedBy: Attribute.Relation<
-      'api::tutorial-and-tip-category.tutorial-and-tip-category',
+      'api::template-website-packet.template-website-packet',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiWowTemplateContentWowTemplateContent
+  extends Schema.SingleType {
+  collectionName: 'wow_template_contents';
+  info: {
+    singularName: 'wow-template-content';
+    pluralName: 'wow-template-contents';
+    displayName: 'wow-template-content';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    headline: Attribute.String;
+    subheadline: Attribute.String;
+    maintenance: Attribute.Boolean & Attribute.DefaultTo<false>;
+    headline_image: Attribute.Media;
+    description_image: Attribute.Media;
+    qna: Attribute.JSON;
+    description: Attribute.JSON;
+    admin_phone_number: Attribute.String;
+    how_to_integrate: Attribute.JSON;
+    terms_and_condition_registration: Attribute.Blocks;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::wow-template-content.wow-template-content',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::wow-template-content.wow-template-content',
       'oneToOne',
       'admin::user'
     > &
@@ -1214,15 +1050,11 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
-      'api::build-deck-request.build-deck-request': ApiBuildDeckRequestBuildDeckRequest;
-      'api::filter-template.filter-template': ApiFilterTemplateFilterTemplate;
-      'api::template.template': ApiTemplateTemplate;
-      'api::template-category.template-category': ApiTemplateCategoryTemplateCategory;
-      'api::template-color.template-color': ApiTemplateColorTemplateColor;
-      'api::template-purpose.template-purpose': ApiTemplatePurposeTemplatePurpose;
-      'api::template-style.template-style': ApiTemplateStyleTemplateStyle;
-      'api::tutorial-and-tip.tutorial-and-tip': ApiTutorialAndTipTutorialAndTip;
-      'api::tutorial-and-tip-category.tutorial-and-tip-category': ApiTutorialAndTipCategoryTutorialAndTipCategory;
+      'api::template-website.template-website': ApiTemplateWebsiteTemplateWebsite;
+      'api::template-website-category.template-website-category': ApiTemplateWebsiteCategoryTemplateWebsiteCategory;
+      'api::template-website-order.template-website-order': ApiTemplateWebsiteOrderTemplateWebsiteOrder;
+      'api::template-website-packet.template-website-packet': ApiTemplateWebsitePacketTemplateWebsitePacket;
+      'api::wow-template-content.wow-template-content': ApiWowTemplateContentWowTemplateContent;
     }
   }
 }

@@ -1,0 +1,50 @@
+{
+  "kind": "collectionType",
+  "collectionName": "template_website_packets",
+  "info": {
+    "singularName": "template-website-packet",
+    "pluralName": "template-website-packets",
+    "displayName": "Template Website Packet",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "packet_code": {
+      "type": "string"
+    },
+    "packet_name": {
+      "type": "string"
+    },
+    "packet_monthly_period": {
+      "type": "integer"
+    },
+    "packet_price": {
+      "type": "biginteger"
+    },
+    "packet_additional_info": {
+      "type": "json"
+    },
+    "template_websites": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::template-website.template-website",
+      "inversedBy": "template_website_packets"
+    },
+    "packet_category": {
+      "type": "enumeration",
+      "enum": [
+        "e-Commerce",
+        "CV Online"
+      ]
+    },
+    "template_website_order": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::template-website-order.template-website-order",
+      "mappedBy": "template_website_packet"
+    }
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "kind": "collectionType",
+  "collectionName": "template_website_orders",
+  "info": {
+    "singularName": "template-website-order",
+    "pluralName": "template-website-orders",
+    "displayName": "Template Website Order",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "full_name": {
+      "type": "string",
+      "required": true
+    },
+    "phone_number": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "email": {
+      "type": "email",
+      "required": true,
+      "unique": true
+    },
+    "subdomain": {
+      "type": "string",
+      "minLength": 3,
+      "unique": true
+    },
+    "template_website_packet": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::template-website-packet.template-website-packet",
+      "inversedBy": "template_website_order"
+    },
+    "template_website": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::template-website.template-website",
+      "inversedBy": "template_website_order"
+    },
+    "start_subscribe": {
+      "type": "date"
+    },
+    "is_free_1_month": {
+      "type": "boolean"
+    },
+    "terms_and_conditions": {
+      "type": "boolean"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "Request Order Diterima",
+        "Request Order Diproses",
+        "Live in Production"
+      ]
+    },
+    "order_id": {
+      "type": "string"
+    },
+    "duration": {
+      "type": "integer"
+    }
+  }
+}

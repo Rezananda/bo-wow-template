@@ -1,0 +1,65 @@
+{
+  "kind": "collectionType",
+  "collectionName": "template_websites",
+  "info": {
+    "singularName": "template-website",
+    "pluralName": "template-websites",
+    "displayName": "Template Website",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "website_name": {
+      "type": "string"
+    },
+    "website_description": {
+      "type": "text"
+    },
+    "website_start_price": {
+      "type": "biginteger"
+    },
+    "website_image": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "website_count_sold": {
+      "type": "integer"
+    },
+    "template_website_category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::template-website-category.template-website-category",
+      "inversedBy": "template_websites"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "website_name",
+      "required": true
+    },
+    "template_website_packets": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::template-website-packet.template-website-packet",
+      "mappedBy": "template_websites"
+    },
+    "template_website_order": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::template-website-order.template-website-order",
+      "mappedBy": "template_website"
+    },
+    "website_feature": {
+      "type": "json"
+    }
+  }
+}

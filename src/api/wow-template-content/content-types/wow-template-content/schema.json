@@ -1,0 +1,63 @@
+{
+  "kind": "singleType",
+  "collectionName": "wow_template_contents",
+  "info": {
+    "singularName": "wow-template-content",
+    "pluralName": "wow-template-contents",
+    "displayName": "wow-template-content",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "headline": {
+      "type": "string"
+    },
+    "subheadline": {
+      "type": "string"
+    },
+    "maintenance": {
+      "type": "boolean",
+      "default": false
+    },
+    "headline_image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "description_image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "qna": {
+      "type": "json"
+    },
+    "description": {
+      "type": "json"
+    },
+    "admin_phone_number": {
+      "type": "string"
+    },
+    "how_to_integrate": {
+      "type": "json"
+    },
+    "terms_and_condition_registration": {
+      "type": "blocks"
+    }
+  }
+}
